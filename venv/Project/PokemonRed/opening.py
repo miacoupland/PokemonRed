@@ -47,7 +47,7 @@ def win(rivalName, name, pokemon, pokes, win):
     elif rivalName == "BROCK":
         print_fast("\nBROCK: I took you for granted. As proof of your victory, here's the BOULDERBADGE! That's an official POKEMON LEAGUE BADGE!\nIts bearer's POKEMON become more powerful!")
         print_fast("\nThere are all kinds of trainers in the world! You appear to be very gifted as a POKEMON trainer! Go to the GYM in CERULEAN and test your abilities!")
-        end()
+        end(rivalName, name, pokemon, pokes, win)
     elif rivalName == "BUG CATCHER":
         print_fast("\nBUG CATCHER: No! CATERPIE can't cut it!")
         time.sleep(1)
@@ -157,7 +157,7 @@ def battle(rivalName, name, rivalPoke, pokemon, pokes, win):
     while myPokemon['hp'] > 0 or rivalPokemon['hp'] > 0:
         if rivalPokemonsHP <= 0:
             print_fast('\n' + name + ' wins the battle!')
-            print_fast('\nYou got 500 poke for winning.')
+            print_fast('\nYou got 500 poke for winning.\n')
             win(rivalName, name, pokemon, pokes, win)
         elif myPokemonsHP <= 0:
             lose(rivalName, name, pokemon, pokes, win)
@@ -165,7 +165,7 @@ def battle(rivalName, name, rivalPoke, pokemon, pokes, win):
         #Created stat choice and implemented a while loop so any typos are ignored and the program doesn't break out in confusion!!
         statChoice = ""
         while statChoice != "id" or statChoice != "height" or statChoice != "weight" or statChoice != "attack" or statChoice != "defence" or statChoice != "special attack" or statChoice != "special defence":
-            statChoice = input("\n\nWhich stat do you want to use? (id, height, weight, attack, defence, special attack, or special defence?)\n")
+            statChoice = input("\nWhich stat do you want to use? (id, height, weight, attack, defence, special attack, or special defence?)\n")
             if statChoice == "id" or statChoice == "height" or statChoice == "weight" or statChoice == "attack" or statChoice == "defence" or statChoice == "special attack" or statChoice == "special defence":
                 myStat = myPokemon[statChoice]
                 rivalStat = rivalPokemon[statChoice]
@@ -198,6 +198,13 @@ def print_fast(str):
         sys.stdout.write(letter)
         sys.stdout.flush()
         time.sleep(0.02)
+
+#Because printing the pokemon was too slow with print_fast...
+def printPokemon(str):
+    for letter in str:
+        sys.stdout.write(letter)
+        sys.stdout.flush()
+        time.sleep(0.01)
 
 #If you choose to enter your house, the code is here
 def yourHouse(rivalName, name, pokemon, pokes, win):
@@ -312,7 +319,7 @@ def pewterCity(rivalName, name, pokemon, pokes, win):
     #direction variable created and while loop used so the user must pick one of these four places
     direction = ""
     while (direction != 1 or direction != 2 or direction != 3 or direction != 4):
-        direction = input("\nWhere would you like to go now? Pick one:\nPokemon Center (1)\nPokemon Mart(2)\nMuseum (3)\nPokemon Gym(4)\n")
+        direction = input("\nWhere would you like to go now? Pick one:\nPokemon Center (1)\nPokemon Mart (2)\nMuseum (3)\nPokemon Gym (4)\n")
         if direction == "1":
             time.sleep(1)
             pokemonCenter(rivalName, name, pokemon, pokes, win)
@@ -365,7 +372,8 @@ def pokemonMart(rivalName, name, pokemon, pokes, win):
     elif product == "ANTIDOTE" and pokes > 200:
         print_fast("\nCLERK: Right, P200! Thank you!")
     else:
-        print_fast("\nClERK: Nevermind, you don't have enough.\n")
+        print_fast("\nClERK: Nevermind, you don't have enough.\n\n")
+        time.sleep(1)
     pewterCity(rivalName, name, pokemon, pokes, win)
 
 #Code to navigate Viridian City. NUMBER FIVE
@@ -424,7 +432,7 @@ def laboratory(rivalName, name, pokes, win):
         #Expand these for giant ASCII... don't... Maybe they are too big for the screen but it's hard to find smaller ones
         if pokemon == 'Charmander' or pokemon == 'charmander':
             print("\nYou have chosen Charmander!")
-            print_fast('''              
+            printPokemon('''              
                           _.--""`-..
                         ,'          `.
                       ,'          __  `.
@@ -466,7 +474,7 @@ def laboratory(rivalName, name, pokes, win):
             break
         elif (pokemon == 'Bulbasaur' or pokemon == 'bulbasaur'):
             print("\nYou have chosen Bulbasaur!")
-            print_fast('''             
+            printPokemon('''             
                                                     `;,;.;,;.;.'
                                                       ..:;:;::;: 
                                                 ..--''' '' ' ' '''--.  
@@ -492,7 +500,7 @@ def laboratory(rivalName, name, pokes, win):
         elif (pokemon == 'Squirtle' or pokemon == 'squirtle'):
             print("\nYou have chosen Squirtle!")
             # ascii squirtle
-            print_fast('''               
+            printPokemon('''               
                            _,........__
                         ,-'            "`-.
                       ,'                   `-.
