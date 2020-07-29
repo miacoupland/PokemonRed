@@ -11,7 +11,7 @@ Future goals include:
 - More gyms and battles, of course!
 - More descriptions of the routes and towns, whilst still being in the style of the games themselves.
 
-Made by Mia Coupland and Rhea Kamath for Code First Girls' Introduction to Python.'''
+Made by Mia and Rhea for Code First Girls' Introduction to Python.'''
 
 import time #This allows us to pause between sentences
 import sys #This helps with emulating the typing effect
