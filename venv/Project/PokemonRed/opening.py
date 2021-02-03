@@ -62,26 +62,19 @@ def win(rivalName, name, pokemon, pokes, win):
 
 #Determines what text appears when you lose
 def lose(rivalName, name, pokemon, pokes, win):
+    faintText = "\n{} is out of usable POKEMON!\n{} blacked out!".format(name, name)
     pokes = 0
     if rivalName == "Quinn":
         print_fast("\nCOOLTRAINER QUINN: Down and out...")
-        print_fast("\n" + name + " is out of useable POKEMON!")
-        print_fast("\n" + name + " blacked out!")
+        print_fast(faintText)
         time.sleep(1)
         routeOne(rivalName, name, pokemon, pokes, win)
-    elif rivalName == "JRTRAINER":
-        print_fast("\n" + name + " is out of useable POKEMON!")
-        print_fast("\n" + name + " blacked out!")
-        time.sleep(1)
-        brockGym(rivalName, name, pokemon, pokes, win)
-    elif rivalName == "BROCK":
-        print_fast("\n" + name + " is out of useable POKEMON!")
-        print_fast("\n" + name + " blacked out!")
+    elif rivalName == "JRTRAINER" or rivalName == "BROCK":
+        print_fast(faintText)
         time.sleep(1)
         brockGym(rivalName, name, pokemon, pokes, win)
     elif rivalName == "BUG CATCHER":
-        print_fast("\n" + name + " is out of useable POKEMON!")
-        print_fast("\n" + name + " blacked out!")
+        print_fast(faintText)
         time.sleep(1)
         viridianForest(rivalName, name, pokemon, pokes, win)
     else:
@@ -153,6 +146,9 @@ def battle(rivalName, name, rivalPoke, pokemon, pokes, win):
     myPokemonsHP = myPokemon['hp']
     rivalPokemonsHP = rivalPokemon['hp']
 
+    myPokemonHPText = "\nNow {} has {} remaining HP.".format(myPokemonName,myPokemonsHP)
+    rivalPokemonHPText = "\n{} has {} remaining HP.".format(rivalPokemonName,rivalPokemonsHP)
+
     #Runs until one Pokemon has fainted
     while myPokemon['hp'] > 0 or rivalPokemon['hp'] > 0:
         if rivalPokemonsHP <= 0:
@@ -177,13 +173,21 @@ def battle(rivalName, name, rivalPoke, pokemon, pokes, win):
         if myStat > rivalStat:
             print_fast('\n{} lost 10HP!'.format(rivalPokemonName))
             rivalPokemonsHP -= 10
-            print_fast("\nNow {} has {} remaining HP.".format(myPokemonName,myPokemonsHP))
-            print_fast("\n{} has {} remaining HP.".format(rivalPokemonName,rivalPokemonsHP))
+            if (rivalPokemonsHP < 0):
+                print_fast(myPokemonHPText)
+                print_fast("\n{} has 0 remaining HP.".format(rivalPokemonName))
+            else:
+                print_fast(myPokemonHPText)
+                print_fast(rivalPokemonHPText)
         elif myStat < rivalStat:
             print_fast('\n{} lost 10HP!'.format(myPokemonName))
             myPokemonsHP -= 10
-            print_fast("\nNow {} has {} remaining HP.".format(myPokemonName,myPokemonsHP))
-            print_fast("\n{} has {} remaining HP.".format(rivalPokemonName,rivalPokemonsHP))
+            if (myPokemonsHP < 0):
+                print_fast("\nNow {} has 0 remaining HP.".format(myPokemonName))
+            else:
+                print_fast(myPokemonHPText)
+                print_fast(rivalPokemonHPText)
+            
 
 #Prints text slower, and letter by letter(ish) to emulate video game text. Used mainly for Prof oak!
 def print_slow(str):
@@ -306,7 +310,7 @@ def brockGym(rivalName, name, pokemon, pokes, win):
 def brockLeader(rivalName, name, pokemon, pokes, win):
     time.sleep(1)
     print_fast("\n\n\nBROCK: I'm BROCK! I'm PEWTER's GYM LEADER! I believe in rock hard defense and determination! That's why my POKEMON are all the rock-type!\nDo you still want to challenge me?\nFine then! Show me your best!")
-    result = battle('BROCK', name, 95, pokemon, pokes, win) #pokemon 95 is Onix
+    battle('BROCK', name, 95, pokemon, pokes, win) #pokemon 95 is Onix
 
 #Code to navigate Pewter city's buildings. NUMBER SEVEN
 def pewterCity(rivalName, name, pokemon, pokes, win):
@@ -544,7 +548,7 @@ def laboratory(rivalName, name, pokes, win):
     time.sleep(1)
     print_fast("\n" + rivalName + ": Wait " + name + "! Let's check out our POKEMON! Come on, I'll take you on!")
 
-    result = battle(rivalName,name,rivalPoke,pokemon,pokes, win)
+    battle(rivalName,name,rivalPoke,pokemon,pokes, win)
 
 #This is the opening to the game. Input your name and your rival's name here. NUMBER ONE
 def opening(pokes, win):
